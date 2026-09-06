@@ -1867,3 +1867,48 @@ body {
         width: 80px;
     }
 }
+
+
+/* =========================================================
+   PERBAIKAN SLIDE 3 DI HP
+   HANYA AGAR 3 BAGIAN TIDAK TERPOTONG
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .things-layout {
+        max-height: none;
+
+        overflow: visible;
+
+        gap: 25px;
+
+        transform: translateY(-8px);
+    }
+
+    .things-list {
+        max-height: none;
+
+        overflow: visible;
+
+        gap: 14px;
+    }
+}
+
+
+/* =========================================================
+   PERBAIKAN EXTRA SMALL HP
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .things-layout {
+        gap: 18px;
+
+        transform: translateY(-5px);
+    }
+
+    .things-list {
+        gap: 10px;
+    }
+}

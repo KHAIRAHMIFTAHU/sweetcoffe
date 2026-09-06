@@ -12,7 +12,6 @@ html,
 body {
     width: 100%;
     height: 100%;
-    min-height: 100%;
 }
 
 body {
@@ -20,15 +19,6 @@ body {
     color: #eee9df;
     font-family: "Inter", sans-serif;
     overflow: hidden;
-}
-
-button {
-    font: inherit;
-}
-
-img {
-    display: block;
-    max-width: 100%;
 }
 
 :root {
@@ -48,7 +38,6 @@ img {
 .opening-frame,
 .main-frame {
     position: relative;
-
     width: calc(100% - 70px);
     height: calc(100% - 70px);
 
@@ -99,10 +88,14 @@ img {
     left: -1px;
 }
 
-.top-left::before,
-.top-left::after {
-    top: 0;
+.top-left::before {
     left: 0;
+    top: 0;
+}
+
+.top-left::after {
+    left: 0;
+    top: 0;
 }
 
 
@@ -113,10 +106,14 @@ img {
     right: -1px;
 }
 
-.top-right::before,
-.top-right::after {
-    top: 0;
+.top-right::before {
     right: 0;
+    top: 0;
+}
+
+.top-right::after {
+    right: 0;
+    top: 0;
 }
 
 
@@ -127,10 +124,14 @@ img {
     left: -1px;
 }
 
-.bottom-left::before,
-.bottom-left::after {
-    bottom: 0;
+.bottom-left::before {
     left: 0;
+    bottom: 0;
+}
+
+.bottom-left::after {
+    left: 0;
+    bottom: 0;
 }
 
 
@@ -141,23 +142,28 @@ img {
     right: -1px;
 }
 
-.bottom-right::before,
-.bottom-right::after {
-    bottom: 0;
+.bottom-right::before {
     right: 0;
+    bottom: 0;
+}
+
+.bottom-right::after {
+    right: 0;
+    bottom: 0;
 }
 
 
 /* =========================================================
-   OPENING
+   OPENING SCREEN
    ========================================================= */
 
 .opening {
     position: fixed;
+
     inset: 0;
 
     width: 100%;
-    height: 100dvh;
+    height: 100vh;
 
     background:
         radial-gradient(
@@ -185,11 +191,16 @@ img {
     transform: scale(1.04);
 }
 
+
+/* =========================================================
+   OPENING GLOW
+   ========================================================= */
+
 .opening-glow {
     position: absolute;
 
-    width: min(550px, 100vw);
-    height: min(550px, 100vw);
+    width: 550px;
+    height: 550px;
 
     border-radius: 50%;
 
@@ -201,12 +212,24 @@ img {
     left: 50%;
 
     transform: translate(-50%, -50%);
+
+    pointer-events: none;
 }
 
-.opening-content {
-    position: relative;
 
-    width: min(700px, 85%);
+/* =========================================================
+   OPENING CONTENT
+   ========================================================= */
+
+.opening-content {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(700px, 80%);
 
     text-align: center;
 
@@ -215,19 +238,21 @@ img {
 
 .small-label {
     font-size: 10px;
+
     letter-spacing: 0.45em;
 
     color: var(--muted);
 
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .opening-content h1 {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(64px, 10vw, 150px);
+    font-size: clamp(70px, 10vw, 150px);
 
     font-weight: 300;
+
     line-height: 0.85;
 
     letter-spacing: -0.04em;
@@ -249,7 +274,7 @@ img {
 .opening-content > p {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(24px, 3vw, 30px);
+    font-size: 30px;
 
     font-weight: 300;
 
@@ -259,7 +284,7 @@ img {
 .opening-description {
     max-width: 410px;
 
-    margin: 12px auto 35px;
+    margin: 12px auto 42px;
 
     font-family: "Inter", sans-serif !important;
 
@@ -277,7 +302,7 @@ img {
 
 .enter-button {
     min-width: 165px;
-    min-height: 52px;
+    height: 52px;
 
     padding: 0 25px;
 
@@ -287,9 +312,11 @@ img {
 
     color: var(--text);
 
+    font-family: "Inter", sans-serif;
+
     font-size: 10px;
 
-    letter-spacing: 0.25em;
+    letter-spacing: 0.3em;
 
     cursor: pointer;
 
@@ -300,7 +327,10 @@ img {
 
     gap: 20px;
 
-    transition: 0.4s ease;
+    transition:
+        background 0.4s ease,
+        border-color 0.4s ease,
+        transform 0.4s ease;
 }
 
 .enter-button:hover {
@@ -313,6 +343,8 @@ img {
 
 .enter-button .arrow {
     font-size: 17px;
+
+    letter-spacing: 0;
 
     transition: transform 0.4s ease;
 }
@@ -361,10 +393,11 @@ img {
 
 .website {
     position: fixed;
+
     inset: 0;
 
     width: 100%;
-    height: 100dvh;
+    height: 100vh;
 
     background:
         radial-gradient(
@@ -375,6 +408,7 @@ img {
         #070707;
 
     opacity: 0;
+
     visibility: hidden;
 
     transition:
@@ -398,27 +432,30 @@ img {
 
 .slide {
     position: absolute;
+
     inset: 0;
 
     width: 100%;
     height: 100%;
 
     opacity: 0;
+
     visibility: hidden;
 
-    transform: translateX(30px);
+    transform: translateX(45px) scale(0.985);
 
     transition:
-        opacity 0.6s ease,
-        transform 0.6s ease,
-        visibility 0.6s ease;
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(.22, .61, .36, 1),
+        visibility 0.7s ease;
 }
 
 .slide.active {
     opacity: 1;
+
     visibility: visible;
 
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
 
     z-index: 5;
 }
@@ -437,6 +474,7 @@ img {
     padding: 90px 10%;
 
     display: flex;
+
     align-items: center;
 }
 
@@ -477,7 +515,7 @@ img {
 
 
 /* =========================================================
-   INTRO
+   INTRO / SLIDE 2
    ========================================================= */
 
 .intro-content {
@@ -489,7 +527,7 @@ img {
 .intro-content h2 {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(60px, 8vw, 120px);
+    font-size: clamp(70px, 8vw, 120px);
 
     font-weight: 300;
 
@@ -497,7 +535,7 @@ img {
 
     letter-spacing: -0.045em;
 
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 }
 
 .intro-content h2 em {
@@ -568,6 +606,8 @@ img {
         grayscale(15%)
         brightness(0.65);
 
+    transform: scale(1.03);
+
     transition: transform 1.5s ease;
 }
 
@@ -577,6 +617,7 @@ img {
 
 .photo-overlay {
     position: absolute;
+
     inset: 0;
 
     background:
@@ -594,7 +635,7 @@ img {
     left: 10%;
     bottom: 15%;
 
-    width: min(550px, 80%);
+    max-width: 550px;
 }
 
 .photo-caption > span {
@@ -606,13 +647,13 @@ img {
 
     color: #c3b9a9;
 
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .photo-caption h2 {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(55px, 7vw, 105px);
+    font-size: clamp(60px, 7vw, 105px);
 
     line-height: 0.85;
 
@@ -620,7 +661,7 @@ img {
 
     letter-spacing: -0.04em;
 
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .photo-caption p {
@@ -643,13 +684,13 @@ img {
 
     grid-template-columns: 0.8fr 1.2fr;
 
-    gap: 8%;
+    gap: 10%;
 }
 
 .things-title h2 {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(50px, 6vw, 90px);
+    font-size: clamp(55px, 6vw, 90px);
 
     font-weight: 300;
 
@@ -669,7 +710,7 @@ img {
 
     flex-direction: column;
 
-    gap: 20px;
+    gap: 25px;
 }
 
 .thing {
@@ -679,9 +720,10 @@ img {
 
     gap: 20px;
 
-    padding-bottom: 20px;
+    padding-bottom: 25px;
 
-    border-bottom: 1px solid var(--line-soft);
+    border-bottom:
+        1px solid var(--line-soft);
 }
 
 .thing-number {
@@ -715,32 +757,49 @@ img {
 
 /* =========================================================
    BIG PHOTO
+   DESKTOP
    ========================================================= */
 
 .single-photo-slide {
     width: 100%;
     height: 100%;
 
-    position: relative;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
 }
+
+
+/* FRAME FOTO */
 
 .big-photo {
     position: absolute;
 
-    width: min(48%, 600px);
+    width: 48%;
     height: 76%;
 
     left: 12%;
+
     top: 50%;
 
     transform: translateY(-50%);
 
     overflow: hidden;
 
-    border: 1px solid rgba(238, 233, 223, 0.22);
+    border:
+        1px solid rgba(238, 233, 223, 0.22);
 
     background: #050505;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
 }
+
+
+/* FOTO */
 
 .big-photo img {
     width: 100%;
@@ -753,7 +812,20 @@ img {
     filter:
         grayscale(10%)
         brightness(0.72);
+
+    transform: scale(1);
+
+    transition:
+        transform 1.3s ease,
+        filter 1.3s ease;
 }
+
+.slide.active .big-photo img {
+    transform: scale(1.015);
+}
+
+
+/* GARIS DALAM FRAME */
 
 .big-photo::after {
     content: "";
@@ -762,38 +834,43 @@ img {
 
     inset: 10px;
 
-    border: 1px solid rgba(238, 233, 223, 0.10);
+    border:
+        1px solid rgba(238, 233, 223, 0.10);
 
     pointer-events: none;
 }
 
+
+/* TEXT DI SAMPING FOTO */
+
 .big-photo-text {
     position: absolute;
 
-    right: 10%;
+    right: 11%;
+
+    width: 30%;
+
     top: 50%;
 
     transform: translateY(-50%);
-
-    width: 30%;
 }
 
 .big-photo-text > span {
-    display: block;
-
-    margin-bottom: 20px;
-
     font-size: 10px;
 
     letter-spacing: 0.35em;
 
     color: var(--muted);
+
+    display: block;
+
+    margin-bottom: 25px;
 }
 
 .big-photo-text h2 {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(45px, 5vw, 80px);
+    font-size: clamp(48px, 5vw, 80px);
 
     font-weight: 300;
 
@@ -801,7 +878,7 @@ img {
 
     letter-spacing: -0.04em;
 
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .big-photo-text p {
@@ -818,25 +895,21 @@ img {
    ========================================================= */
 
 .gallery-slide {
-    display: flex;
+    display: block;
 
-    flex-direction: column;
-
-    justify-content: center;
-
-    padding-top: 60px;
+    padding-top: 80px;
 }
 
 .gallery-heading {
     margin-left: 6%;
 
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .gallery-heading h2 {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(45px, 5vw, 80px);
+    font-size: clamp(50px, 5vw, 80px);
 
     font-weight: 300;
 
@@ -853,9 +926,10 @@ img {
 
 .gallery {
     width: 84%;
-    height: 60%;
 
-    margin: 0 auto;
+    height: 65%;
+
+    margin: auto;
 
     display: grid;
 
@@ -870,12 +944,10 @@ img {
 .gallery-item {
     position: relative;
 
-    min-width: 0;
-    min-height: 0;
-
     overflow: hidden;
 
-    border: 1px solid rgba(238, 233, 223, 0.12);
+    border:
+        1px solid rgba(238, 233, 223, 0.12);
 
     background: #050505;
 }
@@ -914,6 +986,9 @@ img {
     font-size: 18px;
 
     color: white;
+
+    text-shadow:
+        0 2px 10px black;
 }
 
 
@@ -934,7 +1009,7 @@ img {
 .message-content h2 {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(55px, 7vw, 105px);
+    font-size: clamp(60px, 7vw, 105px);
 
     font-weight: 300;
 
@@ -942,7 +1017,7 @@ img {
 
     letter-spacing: -0.04em;
 
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .message-line {
@@ -951,7 +1026,7 @@ img {
 
     background: var(--accent);
 
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .message-content p {
@@ -959,11 +1034,11 @@ img {
 
     font-size: 13px;
 
-    line-height: 1.9;
+    line-height: 1.95;
 
     color: var(--muted);
 
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 
@@ -998,6 +1073,14 @@ img {
     filter:
         grayscale(15%)
         brightness(0.5);
+
+    transform: scale(1.04);
+
+    transition: transform 1.4s ease;
+}
+
+.slide.active .closing-photo img {
+    transform: scale(1);
 }
 
 .closing-photo-overlay {
@@ -1019,7 +1102,7 @@ img {
 
     text-align: center;
 
-    width: min(800px, 80%);
+    width: 80%;
 }
 
 .closing-content > span {
@@ -1031,13 +1114,13 @@ img {
 
     display: block;
 
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .closing-content h2 {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(60px, 8vw, 125px);
+    font-size: clamp(65px, 8vw, 125px);
 
     font-weight: 300;
 
@@ -1045,7 +1128,7 @@ img {
 
     letter-spacing: -0.045em;
 
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .closing-line {
@@ -1054,13 +1137,16 @@ img {
 
     background: #c8bdaa;
 
-    margin: 0 auto 25px;
+    margin:
+        auto
+        auto
+        25px;
 }
 
 .closing-content p {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(21px, 2.5vw, 27px);
+    font-size: 27px;
 
     color: #ddd5c9;
 }
@@ -1072,7 +1158,9 @@ img {
 
     letter-spacing: 0.2em;
 
-    color: rgba(238, 233, 223, 0.5) !important;
+    color:
+        rgba(238, 233, 223, 0.5)
+        !important;
 
     margin-top: 25px;
 }
@@ -1100,25 +1188,49 @@ img {
 
     gap: 8px;
 
-    border: 1px solid rgba(238, 233, 223, 0.18);
+    border:
+        1px solid rgba(238, 233, 223, 0.18);
 
-    background: rgba(0, 0, 0, 0.35);
+    background:
+        rgba(0, 0, 0, 0.35);
 
-    color: rgba(238, 233, 223, 0.65);
+    color:
+        rgba(238, 233, 223, 0.65);
 
     font-size: 8px;
 
     letter-spacing: 0.18em;
 
     cursor: pointer;
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.music-button:hover {
+    border-color:
+        rgba(238, 233, 223, 0.55);
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    color: #eee9df;
 }
 
 .music-icon {
     font-size: 15px;
+
+    line-height: 1;
 }
 
 .music-button.playing .music-icon {
-    animation: musicPulse 1s ease-in-out infinite;
+    animation:
+        musicPulse
+        1s
+        ease-in-out
+        infinite;
 }
 
 @keyframes musicPulse {
@@ -1159,21 +1271,41 @@ img {
     width: 38px;
     height: 38px;
 
-    border: 1px solid rgba(238, 233, 223, 0.25);
+    border:
+        1px solid rgba(238, 233, 223, 0.25);
 
-    background: rgba(0, 0, 0, 0.35);
+    background:
+        rgba(0, 0, 0, 0.35);
 
     color: #eee9df;
 
     font-size: 17px;
 
     cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.nav-button:hover {
+    background:
+        rgba(255, 255, 255, 0.1);
+
+    border-color:
+        rgba(238, 233, 223, 0.6);
+
+    transform:
+        translateY(-2px);
 }
 
 .nav-button:disabled {
     opacity: 0.25;
 
     cursor: default;
+
+    transform: none;
 }
 
 
@@ -1196,7 +1328,8 @@ img {
 
     letter-spacing: 0.15em;
 
-    color: rgba(238, 233, 223, 0.55);
+    color:
+        rgba(238, 233, 223, 0.55);
 
     margin-bottom: 8px;
 }
@@ -1205,7 +1338,8 @@ img {
     width: 100%;
     height: 1px;
 
-    background: rgba(238, 233, 223, 0.12);
+    background:
+        rgba(238, 233, 223, 0.12);
 
     overflow: hidden;
 }
@@ -1216,7 +1350,8 @@ img {
 
     background: #c8bdac;
 
-    transition: width 0.6s ease;
+    transition:
+        width 0.6s ease;
 }
 
 
@@ -1249,9 +1384,14 @@ img {
 
     border: none;
 
-    background: rgba(238, 233, 223, 0.25);
+    background:
+        rgba(238, 233, 223, 0.25);
 
     cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
 }
 
 .dot.active {
@@ -1275,14 +1415,15 @@ img {
 
     letter-spacing: 0.4em;
 
-    color: rgba(238, 233, 223, 0.35);
+    color:
+        rgba(238, 233, 223, 0.35);
 
     z-index: 50;
 }
 
 
 /* =========================================================
-   TABLET
+   RESPONSIVE TABLET
    ========================================================= */
 
 @media (max-width: 900px) {
@@ -1290,318 +1431,376 @@ img {
     .opening-frame,
     .main-frame {
         width: calc(100% - 30px);
+
         height: calc(100% - 30px);
-    }
-
-    .slide-inner {
-        padding: 80px 8%;
-    }
-
-    .intro-content,
-    .message-content {
-        margin-left: 0;
-    }
-
-    .things-layout {
-        grid-template-columns: 1fr;
-
-        gap: 35px;
-    }
-
-    .big-photo {
-        width: 52%;
-        left: 6%;
-    }
-
-    .big-photo-text {
-        right: 6%;
-        width: 34%;
-    }
-
-    .gallery {
-        width: 90%;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    .opening,
-    .website {
-        height: 100dvh;
-    }
-
-    .opening-frame,
-    .main-frame {
-        width: calc(100% - 20px);
-        height: calc(100% - 20px);
-    }
-
-    .corner {
-        width: 25px;
-        height: 25px;
     }
 
 
     /* OPENING */
 
     .opening-content {
-        width: 88%;
+        width: 85%;
     }
 
     .opening-content h1 {
-        font-size: clamp(55px, 18vw, 75px);
-    }
-
-    .opening-content > p {
-        font-size: 23px;
-    }
-
-    .opening-description {
-        font-size: 11px !important;
-        line-height: 1.7;
-    }
-
-    .small-label {
-        font-size: 8px;
-        margin-bottom: 20px;
-    }
-
-    .opening-number {
-        left: 20px;
-        bottom: 18px;
-    }
-
-    .opening-bottom-text {
-        right: 18px;
-        bottom: 23px;
-
-        font-size: 6px;
-
-        letter-spacing: 0.2em;
+        font-size: 80px;
     }
 
 
-    /* HEADER */
-
-    .slide-number {
-        top: 22px;
-        left: 20px;
-
-        font-size: 7px;
-    }
-
-    .brand {
-        top: 22px;
-        right: 20px;
-
-        font-size: 6px;
-
-        letter-spacing: 0.25em;
-    }
-
-    .music-button {
-        left: 18px;
-        top: 45px;
-
-        height: 30px;
-
-        padding: 0 9px;
-
-        font-size: 7px;
-    }
-
-
-    /* GENERAL SLIDE */
+    /* SLIDE */
 
     .slide-inner {
-        padding: 90px 9% 80px;
-
-        overflow-y: auto;
+        padding: 80px 8%;
     }
-
-    .vertical-text {
-        display: none;
-    }
-
-    .eyebrow {
-        font-size: 7px;
-
-        margin-bottom: 18px;
-    }
-
-
-    /* INTRO */
 
     .intro-content {
-        width: 100%;
-    }
-
-    .intro-content h2 {
-        font-size: clamp(50px, 17vw, 70px);
-
-        margin-bottom: 25px;
-    }
-
-    .intro-content p {
-        font-size: 11px;
-
-        line-height: 1.75;
-    }
-
-
-    /* PHOTO */
-
-    .photo-caption {
-        left: 9%;
-        bottom: 14%;
-
-        width: 78%;
-    }
-
-    .photo-caption > span {
-        font-size: 7px;
-
-        margin-bottom: 15px;
-    }
-
-    .photo-caption h2 {
-        font-size: clamp(48px, 16vw, 65px);
-
-        margin-bottom: 15px;
-    }
-
-    .photo-caption p {
-        font-size: 10px;
-
-        line-height: 1.7;
+        margin-left: 0;
     }
 
 
     /* THINGS */
 
     .things-layout {
-        display: flex;
+        grid-template-columns: 1fr;
 
-        flex-direction: column;
+        gap: 40px;
 
-        gap: 28px;
+        max-height: 75%;
+
+        overflow: hidden;
     }
 
-    .things-title h2 {
-        font-size: clamp(45px, 15vw, 62px);
+
+    /* BIG PHOTO */
+
+    .big-photo {
+        width: 55%;
+
+        left: 7%;
+
+        height: 65%;
     }
 
-    .things-list {
-        gap: 15px;
+    .big-photo-text {
+        right: 7%;
+
+        width: 32%;
     }
 
-    .thing {
-        grid-template-columns: 30px 1fr;
 
-        gap: 12px;
+    /* GALLERY */
 
-        padding-bottom: 15px;
+    .gallery {
+        width: 90%;
+
+        height: 58%;
     }
+}
 
-    .thing-number {
-        font-size: 15px;
-    }
 
-    .thing h3 {
-        font-size: 20px;
-    }
+/* =========================================================
+   RESPONSIVE MOBILE
+   ========================================================= */
 
-    .thing p {
-        font-size: 10px;
+@media (max-width: 600px) {
 
-        line-height: 1.65;
+    .opening-frame,
+    .main-frame {
+        width: calc(100% - 20px);
+
+        height: calc(100% - 20px);
     }
 
 
     /* =====================================================
-       BIG PHOTO MOBILE
-       Menggunakan FLEX agar foto dan teks tidak bertabrakan
+       CORNERS
+       ===================================================== */
+
+    .corner {
+        width: 25px;
+
+        height: 25px;
+    }
+
+
+    /* =====================================================
+       OPENING
+       TETAP SEPERTI DESAIN AWAL
+       ===================================================== */
+
+    .opening-content {
+        width: 88%;
+    }
+
+    .opening-content h1 {
+        font-size: 64px;
+    }
+
+    .opening-content > p {
+        font-size: 24px;
+    }
+
+    .opening-description {
+        font-size: 11px !important;
+
+        line-height: 1.8;
+    }
+
+    .opening-number {
+        left: 20px;
+
+        bottom: 20px;
+    }
+
+    .opening-bottom-text {
+        right: 20px;
+
+        bottom: 24px;
+
+        font-size: 7px;
+    }
+
+
+    /* =====================================================
+       SLIDE NUMBER
+       ===================================================== */
+
+    .slide-number {
+        top: 25px;
+
+        left: 25px;
+    }
+
+
+    /* =====================================================
+       BRAND
+       ===================================================== */
+
+    .brand {
+        top: 24px;
+
+        right: 25px;
+    }
+
+
+    /* =====================================================
+       MUSIC
+       ===================================================== */
+
+    .music-button {
+        left: 20px;
+
+        top: 20px;
+    }
+
+
+    /* =====================================================
+       VERTICAL TEXT
+       ===================================================== */
+
+    .vertical-text {
+        display: none;
+    }
+
+
+    /* =====================================================
+       SLIDE 2 / INTRO
+       POSISI TENGAH HP
+       ===================================================== */
+
+    .slide-inner {
+        padding:
+            60px
+            9%
+            70px;
+
+        align-items: center;
+    }
+
+    .intro-content {
+        width: 100%;
+
+        max-width: 100%;
+
+        margin-left: 0;
+
+        transform: translateY(-15px);
+    }
+
+    .intro-content h2 {
+        font-size: 64px;
+
+        margin-bottom: 30px;
+    }
+
+    .intro-content p {
+        font-size: 11px;
+
+        line-height: 1.8;
+
+        max-width: 100%;
+    }
+
+
+    /* =====================================================
+       PHOTO SLIDE
+       ===================================================== */
+
+    .photo-caption {
+        left: 8%;
+
+        bottom: 16%;
+
+        max-width: 80%;
+    }
+
+    .photo-caption h2 {
+        font-size: 60px;
+    }
+
+
+    /* =====================================================
+       THINGS
+       ===================================================== */
+
+    .things-title h2 {
+        font-size: 58px;
+    }
+
+    .thing h3 {
+        font-size: 21px;
+    }
+
+    .thing p {
+        font-size: 10px;
+    }
+
+
+    /* =====================================================
+       FOTO PERTAMA - MOBILE
+       POSISI TENGAH
        ===================================================== */
 
     .single-photo-slide {
-        position: relative;
+        width: 100%;
+        height: 100%;
 
         display: flex;
 
         flex-direction: column;
 
+        align-items: center;
+
         justify-content: center;
 
-        gap: 22px;
+        gap: 18px;
 
-        padding: 80px 10% 85px;
+        padding:
+            55px
+            9%
+            70px;
     }
+
+
+    /* FOTO */
 
     .big-photo {
         position: relative;
 
         top: auto;
         left: auto;
+        right: auto;
+        bottom: auto;
 
         transform: none;
 
-        width: 100%;
-        height: min(48dvh, 400px);
+        width: 82%;
+
+        height: 43%;
 
         flex-shrink: 0;
+
+        background: #050505;
     }
+
+
+    /* FOTO UTUH */
+
+    .big-photo img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: contain;
+
+        object-position: center;
+
+        filter:
+            grayscale(10%)
+            brightness(0.72);
+    }
+
+
+    /* GARIS FRAME */
 
     .big-photo::after {
         inset: 7px;
     }
 
-    .big-photo img {
-        object-fit: contain;
-    }
+
+    /* =====================================================
+       TEXT DI BAWAH FOTO
+       ===================================================== */
 
     .big-photo-text {
         position: relative;
 
         top: auto;
+        left: auto;
         right: auto;
+        bottom: auto;
 
         transform: none;
 
-        width: 100%;
+        width: 92%;
+
+        text-align: center;
     }
 
     .big-photo-text > span {
+        display: block;
+
+        margin-bottom: 9px;
+
         font-size: 8px;
 
-        margin-bottom: 12px;
+        letter-spacing: 0.3em;
     }
 
     .big-photo-text h2 {
-        font-size: clamp(40px, 13vw, 55px);
+        font-size: 45px;
 
-        margin-bottom: 12px;
+        line-height: 0.9;
+
+        margin-bottom: 11px;
     }
 
     .big-photo-text p {
         font-size: 10px;
 
-        line-height: 1.7;
+        line-height: 1.65;
+
+        max-width: 330px;
+
+        margin: auto;
     }
 
 
     /* =====================================================
-       GALLERY MOBILE
+       GALLERY
        ===================================================== */
 
     .gallery-slide {
-        padding: 85px 7% 85px;
-
-        justify-content: center;
+        padding-top: 70px;
     }
 
     .gallery-heading {
@@ -1611,16 +1810,21 @@ img {
     }
 
     .gallery-heading h2 {
-        font-size: clamp(42px, 14vw, 58px);
+        font-size: 55px;
     }
 
     .gallery {
         width: 100%;
-        height: min(55dvh, 430px);
 
-        grid-template-columns: 1fr 1fr;
+        height: 58%;
 
-        grid-template-rows: 1.2fr 1fr;
+        grid-template-columns:
+            1fr
+            1fr;
+
+        grid-template-rows:
+            1.2fr
+            1fr;
 
         gap: 8px;
     }
@@ -1629,92 +1833,80 @@ img {
         grid-column: span 2;
     }
 
-    .gallery-item span {
-        font-size: 15px;
 
-        bottom: 8px;
-        left: 10px;
+    /* =====================================================
+       MESSAGE
+       ===================================================== */
+
+    .message-slide {
+        justify-content: center;
     }
 
-
-    /* MESSAGE */
-
     .message-content {
-        width: 100%;
+        margin-left: 0;
+
+        width: 85%;
+
+        transform: translateY(-10px);
     }
 
     .message-content h2 {
-        font-size: clamp(48px, 15vw, 65px);
-
-        margin-bottom: 25px;
+        font-size: 58px;
     }
 
     .message-content p {
         font-size: 11px;
 
-        line-height: 1.75;
+        line-height: 1.8;
     }
 
 
-    /* CLOSING */
+    /* =====================================================
+       CLOSING
+       ===================================================== */
 
     .closing-content {
         width: 85%;
     }
 
-    .closing-content > span {
-        font-size: 7px;
-
-        margin-bottom: 20px;
-    }
-
     .closing-content h2 {
-        font-size: clamp(52px, 16vw, 70px);
-
-        margin-bottom: 25px;
+        font-size: 66px;
     }
 
     .closing-content p {
-        font-size: 21px;
+        font-size: 22px;
 
         line-height: 1.4;
     }
 
-    .closing-small {
-        font-size: 8px !important;
-    }
 
-
-    /* NAVIGATION */
+    /* =====================================================
+       NAVIGATION
+       ===================================================== */
 
     .navigation {
-        bottom: 15px;
+        bottom: 20px;
 
-        gap: 10px;
+        gap: 12px;
     }
 
     .nav-button {
         width: 34px;
-        height: 34px;
 
-        font-size: 15px;
+        height: 34px;
     }
 
     .progress {
-        width: 90px;
-    }
-
-    .progress-top {
-        font-size: 7px;
-
-        margin-bottom: 6px;
+        width: 100px;
     }
 
 
-    /* DOTS */
+    /* =====================================================
+       DOTS
+       ===================================================== */
 
     .dots {
-        display: none;
+        right: 17px;
     }
 }
 
@@ -1725,32 +1917,179 @@ img {
 
 @media (max-width: 380px) {
 
+    /* OPENING TETAP */
+
     .opening-content h1 {
-        font-size: 54px;
+        font-size: 55px;
+    }
+
+    .opening-content > p {
+        font-size: 21px;
     }
 
     .opening-description {
         font-size: 10px !important;
     }
 
-    .slide-inner {
-        padding-left: 8%;
-        padding-right: 8%;
+
+    /* SLIDE 2 */
+
+    .intro-content {
+        transform: translateY(-12px);
+    }
+
+    .intro-content h2 {
+        font-size: 55px;
+    }
+
+
+    /* PHOTO SLIDE */
+
+    .photo-caption h2 {
+        font-size: 50px;
+    }
+
+
+    /* THINGS */
+
+    .things-title h2 {
+        font-size: 50px;
+    }
+
+
+    /* =====================================================
+       FOTO UTAMA HP KECIL
+       ===================================================== */
+
+    .single-photo-slide {
+        gap: 14px;
+
+        padding:
+            50px
+            7%
+            65px;
     }
 
     .big-photo {
-        height: min(43dvh, 340px);
+        width: 84%;
+
+        height: 40%;
+    }
+
+    .big-photo-text {
+        width: 94%;
+    }
+
+    .big-photo-text > span {
+        font-size: 7px;
+
+        margin-bottom: 7px;
     }
 
     .big-photo-text h2 {
         font-size: 40px;
+
+        margin-bottom: 9px;
+    }
+
+    .big-photo-text p {
+        font-size: 9px;
+
+        line-height: 1.55;
+    }
+
+
+    /* MESSAGE */
+
+    .message-content {
+        transform: translateY(-8px);
+    }
+
+    .message-content h2 {
+        font-size: 50px;
+    }
+
+
+    /* CLOSING */
+
+    .closing-content h2 {
+        font-size: 57px;
+    }
+
+    .closing-content p {
+        font-size: 19px;
+    }
+
+
+    /* PROGRESS */
+
+    .progress {
+        width: 80px;
+    }
+}
+
+
+/* =========================================================
+   SUPER SMALL PHONE
+   320px
+   ========================================================= */
+
+@media (max-width: 340px) {
+
+    .opening-content h1 {
+        font-size: 50px;
+    }
+
+    .opening-content > p {
+        font-size: 19px;
+    }
+
+    .opening-description {
+        font-size: 9px !important;
+    }
+
+
+    .slide-inner {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+
+    .intro-content h2 {
+        font-size: 50px;
+    }
+
+
+    .big-photo {
+        width: 86%;
+        height: 38%;
+    }
+
+    .big-photo-text {
+        width: 96%;
+    }
+
+    .big-photo-text h2 {
+        font-size: 37px;
+    }
+
+    .big-photo-text p {
+        font-size: 8.5px;
+    }
+
+
+    .navigation {
+        bottom: 16px;
+
+        gap: 8px;
+    }
+
+    .nav-button {
+        width: 31px;
+        height: 31px;
     }
 
     .progress {
-        width: 75px;
-    }
-
-    .navigation {
-        gap: 7px;
+        width: 70px;
     }
 }
